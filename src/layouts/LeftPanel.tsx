@@ -2,7 +2,7 @@ import React from "react";
 
 function LeftPanel() {
   return (
-    <div className="bg-gray-100 h-full border-black border-r rounded-r-lg">
+    <div className="bg-gray-50 h-full border-gray-600 border-r rounded-r-md">
       LeftPanel
     </div>
   );
