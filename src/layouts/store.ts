@@ -9,24 +9,13 @@ import {
   OnNodesChange,
   OnEdgesChange,
   OnConnect,
-  Position,
   applyNodeChanges,
   applyEdgeChanges,
+
+
 } from "react-flow-renderer";
 
-const initialNodes: Node[] = [
-  // {
-  //   id: "111",
-  //   position: { x: 100, y: 100 },
-  //   data: {
-  //     text: "I am an editable, resizable and rotatable node.",
-  //     color: "#ff0072",
-  //   },
-  //   type: "resizable",
-  //   sourcePosition: Position.Top,
-  //   targetPosition: Position.Bottom,
-  // },
-];
+const initialNodes: Node[] = [];
 
 const initialEdges: Edge[] = [];
 
@@ -38,6 +27,8 @@ type RFState = {
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
 };
+
+
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 const useStore = create<RFState>((set, get) => ({

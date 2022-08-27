@@ -1,11 +1,31 @@
 import { useState } from "react";
 import useStore from "./store";
+import { Position } from "react-flow-renderer";
 
 const RightLayout = () => {
   const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
 
   const setNodes = useStore((state) => state.setNodes);
+
+// adding resizable node
+const addResizableBlock = () => {
+  setNodes(  
+    {
+      id: `${Math.random()}`,
+      position: { x: 100, y: 100 },
+      data: {
+        text: "I am an editable, resizable and rotatable node.",
+        color: "rgba(240,240,240,0.7)",
+      },
+      type: "resizable",
+      sourcePosition: Position.Top,
+      targetPosition: Position.Bottom,
+     },
+    )
+}
+
   const clickHandler = () => {
+    console.log("addDocumentNode")
     setNodes({
       id: `${Math.random()}`,
       type: "documentNode",
@@ -15,6 +35,7 @@ const RightLayout = () => {
   };
 
   const addSubNode = (documentBucketId: string) => {
+    console.log("addSubNode")
     setNodes({
       id: `${Math.random()}`,
       type: "documentNode",
@@ -27,6 +48,7 @@ const RightLayout = () => {
   };
 
   const bucketCreator = () => {
+    console.log("addbucketCreator")
     setBucketId(`${Math.random()}`);
     setNodes({
       id: bucketId,
@@ -59,7 +81,7 @@ const RightLayout = () => {
   };
 
   return (
-    <div>
+    <div className="flex-row">
 
       <div
         onClick={clickHandler}
@@ -72,6 +94,12 @@ const RightLayout = () => {
         className="text-xs border border-black text-center p-2 m-2 cursor-pointer rounded-lg"
       >
         Document Bucket
+      </div>
+      <div
+      onClick={addResizableBlock}
+        className="text-xs border border-black text-center p-2 m-2 cursor-pointer rounded-lg"
+        >
+        Resizable Node
       </div>
 
     </div>

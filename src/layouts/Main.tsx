@@ -28,7 +28,7 @@ function Main() {
         <div className="h-16 p-2 border-gray-600 border-b ">
           <SearchBar />
         </div>
-        <div className="flex">
+        <div className="flex" id="moveableContainer">
           <div style={{ width: "95%", height: "calc(100vh - 4rem)" }}>
             <ReactFlow
               nodes={nodes}

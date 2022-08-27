@@ -20,6 +20,7 @@ export default function Resizable({
   const [transform, setTransform] = useState("none");
   const updateNodeInternals = useUpdateNodeInternals();
 
+    
   const style = useMemo(
     () => ({
       transform,
@@ -27,8 +28,10 @@ export default function Resizable({
       height: size.height,
       background: data?.color,
       padding: 20,
-      borderRadius: 20,
+      borderRadius: 2,
+      border: "1px solid black"
     }),
+    
     [transform, size.width, size.height, data?.color]
   );
 
@@ -39,11 +42,11 @@ export default function Resizable({
 
     const moveable = new Moveable(document.body, {
       target: nodeRef.current,
-      className: "nodrag",
-      draggable: true,
+      className: 'nodrag',
+      draggable: false,
       resizable: true,
       scalable: false,
-      rotatable: false,
+      rotatable: true,
       warpable: false,
       pinchable: false,
       origin: false,
@@ -74,26 +77,11 @@ export default function Resizable({
 
   return (
     <div ref={nodeRef} style={style}>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          resize: "none",
-          backgroundColor: "rgba(255, 255, 255, 0)",
-          fontWeight: "bold",
-          color: "white",
-          padding: 5,
-          fontSize: 22,
-          boxSizing: "border-box",
-          outline: "none",
-          border: "none",
-        }}>
-
+      <div>
         {data?.text}
         </div>
-      
-      <Handle position={sourcePosition ?? Position.Top} type="source" />
-      <Handle position={targetPosition ?? Position.Bottom} type="target" />
+      <Handle position={sourcePosition ?? Position.Top} type="target" />
+      <Handle position={targetPosition ?? Position.Bottom} type="source" />
     </div>
   );
 }
