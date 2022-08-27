@@ -1,6 +1,8 @@
+import { FunctionComponent } from "react";
 import SearchBar from "../Components/SearchBar";
 import DocumentNode from "../Components/CustomeNodes/DocumentNode";
 import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
+import Resizable from "../Components/CustomeNodes/Resizable";
 import useStore from "./store";
 
 import ReactFlow, { FitViewOptions, Background } from "react-flow-renderer";
@@ -9,6 +11,7 @@ import RightPanel from "../layouts/RightPanel";
 const nodeTypes = {
   documentNode: DocumentNode,
   documentBucketNode: DocumentBucketNode,
+  resizable: Resizable as FunctionComponent,
 };
 
 // const initialNodes: Node[] = [

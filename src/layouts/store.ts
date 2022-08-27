@@ -9,16 +9,22 @@ import {
   OnNodesChange,
   OnEdgesChange,
   OnConnect,
+  Position,
   applyNodeChanges,
   applyEdgeChanges,
 } from "react-flow-renderer";
 
 const initialNodes: Node[] = [
   {
-    id: "node-1",
-    type: "documentNode",
-    position: { x: 250, y: 250 },
-    data: { value: 123 },
+    id: "111",
+    position: { x: 100, y: 100 },
+    data: {
+      text: "I am an editable, resizable and rotatable node.",
+      color: "#ff0072",
+    },
+    type: "resizable",
+    sourcePosition: Position.Top,
+    targetPosition: Position.Bottom,
   },
 ];
 
