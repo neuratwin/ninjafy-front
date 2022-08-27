@@ -14,16 +14,6 @@ const nodeTypes = {
   resizable: Resizable as FunctionComponent,
 };
 
-// const initialNodes: Node[] = [
-//   {
-//     id: "node-1",
-//     type: "documentNode",
-//     position: { x: 250, y: 250 },
-//     data: { value: 123 },
-//   },
-// ];
-
-// const initialEdges: Edge[] = [];
 
 const fitViewOptions: FitViewOptions = {
   padding: 0.2,

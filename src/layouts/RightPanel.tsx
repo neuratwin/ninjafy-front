@@ -59,7 +59,8 @@ const RightLayout = () => {
   };
 
   return (
-    <>
+    <div>
+
       <div
         onClick={clickHandler}
         className="text-xs border border-black text-center p-2 m-2  cursor-pointer rounded-lg"
@@ -72,7 +73,8 @@ const RightLayout = () => {
       >
         Document Bucket
       </div>
-    </>
+
+    </div>
   );
 };
 

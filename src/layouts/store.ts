@@ -15,17 +15,17 @@ import {
 } from "react-flow-renderer";
 
 const initialNodes: Node[] = [
-  {
-    id: "111",
-    position: { x: 100, y: 100 },
-    data: {
-      text: "I am an editable, resizable and rotatable node.",
-      color: "#ff0072",
-    },
-    type: "resizable",
-    sourcePosition: Position.Top,
-    targetPosition: Position.Bottom,
-  },
+  // {
+  //   id: "111",
+  //   position: { x: 100, y: 100 },
+  //   data: {
+  //     text: "I am an editable, resizable and rotatable node.",
+  //     color: "#ff0072",
+  //   },
+  //   type: "resizable",
+  //   sourcePosition: Position.Top,
+  //   targetPosition: Position.Bottom,
+  // },
 ];
 
 const initialEdges: Edge[] = [];

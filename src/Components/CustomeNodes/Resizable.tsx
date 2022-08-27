@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Moveable from "moveable";
 import {
   Handle,
@@ -74,7 +74,7 @@ export default function Resizable({
 
   return (
     <div ref={nodeRef} style={style}>
-      <textarea
+      <div
         style={{
           width: "100%",
           height: "100%",
@@ -87,9 +87,11 @@ export default function Resizable({
           boxSizing: "border-box",
           outline: "none",
           border: "none",
-        }}
-        defaultValue={data?.text}
-      />
+        }}>
+
+        {data?.text}
+        </div>
+      
       <Handle position={sourcePosition ?? Position.Top} type="source" />
       <Handle position={targetPosition ?? Position.Bottom} type="target" />
     </div>
