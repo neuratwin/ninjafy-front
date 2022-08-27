@@ -1,37 +1,58 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, MouseEvent } from "react";
 import { Handle, Position } from "react-flow-renderer";
+
 
 function DocumentNode() {
   const [documentId, setDocumentId] = useState<string | null>();
+  const [size, setSize] = useState<{width:number, height:number}>({width:120, height:70});
+
+
   const onChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     setDocumentId(evt.target.value);
+    setSize({width: 200, height:200})
   }, []);
 
+  
+
+
   return (
-    <div className="border p-4 border-gray-600 rounded-lg text-sm bg-white">
+    <div
+    className="resize"
+    >
+    <div className="border p-2 border-gray-600 rounded-lg text-sm bg-white ">
       <Handle type="target" position={Position.Top} />
       <div>
         {documentId ? documentId.split("\\").pop() : ""}
         {!documentId && (
-          <>
+          <div>
+          
             <label htmlFor="text" className="block text-sm">
-              Start your workflow
+              File link
             </label>
             <input
               type="file"
               id="avatar"
               name="avatar"
               accept="image/png, image/jpeg"
-              className="text-lg border-2 rounded-lg opacity-0 absolute"
+              className="text-xs border-2 rounded-lg opacity-0 absolute"
               onChange={onChange}
             />
-            <div className="border border-blue-100 p-2 rounded-lg text-sm">
+            <div className="border border-gray-700 p-2 rounded-lg text-sm">
               Upload your file
             </div>
-          </>
+            <div 
+            className="flex ">
+              <div
+
+              className="absolute ml-28 cursor-nwse-resize opacity-0">
+              ++
+              </div>
+              </div>
+          </div>
         )}
       </div>
       <Handle type="source" position={Position.Bottom} id="b" />
+    </div>
     </div>
   );
 }

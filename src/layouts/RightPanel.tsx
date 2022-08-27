@@ -21,6 +21,7 @@ const RightLayout = () => {
       data: { value: 123 },
       position: { x: Math.random() * 100, y: Math.random() * 100 },
       parentNode: documentBucketId,
+      extent: "parent"
     });
   };
 
@@ -30,22 +31,26 @@ const RightLayout = () => {
       id: bucketId,
       data: {
         label: (
-          <div>
+          <div className="flex justify-between border-b border-black pb-2">
+          <div className="text-cyan-500 ml-2 flex  text-base">
             Document Bucket
+            </div>
             <div
               onClick={() => addSubNode(bucketId)}
-              className="rounded-lg border border-black cursor-pointer"
+              className="text-gray-800 text-base font-bold  bg-white rounded-md w-8 border border-gray-600 cursor-pointer hover:bg-gray-300"
             >
-              Add subNodes
+              +
             </div>
-          </div>
+            
+            </div>
+          
         ),
       },
       position: { x: Math.random() * 100, y: Math.random() * 100 },
       style: {
         width: 250,
         height: 250,
-        backgroundColor: "rgba(240,240,240,0.25)",
+        backgroundColor: "rgba(240,240,240,0.5)",
       },
     });
   };
