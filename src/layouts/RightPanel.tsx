@@ -22,6 +22,7 @@ const RightLayout = () => {
       position: { x: Math.random() * 100, y: Math.random() * 100 },
       parentNode: documentBucketId,
       extent: "parent"
+
     });
   };
 
@@ -31,6 +32,7 @@ const RightLayout = () => {
       id: bucketId,
       data: {
         label: (
+
           <div className="flex justify-between border-b border-black pb-2">
           <div className="text-cyan-500 ml-2 flex  text-base">
             Document Bucket
@@ -38,6 +40,7 @@ const RightLayout = () => {
             <div
               onClick={() => addSubNode(bucketId)}
               className="text-gray-800 text-base font-bold  bg-white rounded-md w-8 border border-gray-600 cursor-pointer hover:bg-gray-300"
+
             >
               +
             </div>
