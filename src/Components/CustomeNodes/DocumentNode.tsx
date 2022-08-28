@@ -1,15 +1,14 @@
-import React, { useCallback, useState, MouseEvent } from "react";
+import { useCallback, useState, ChangeEvent } from "react";
 import { Handle, Position } from "react-flow-renderer";
 
 
 function DocumentNode() {
   const [documentId, setDocumentId] = useState<string | null>();
-  const [size, setSize] = useState<{width:number, height:number}>({width:120, height:70});
+  
 
 
-  const onChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     setDocumentId(evt.target.value);
-    setSize({width: 200, height:200})
   }, []);
 
   

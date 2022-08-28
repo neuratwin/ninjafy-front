@@ -3,6 +3,7 @@ import SearchBar from "../Components/SearchBar";
 import DocumentNode from "../Components/CustomeNodes/DocumentNode";
 import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
 import Resizable from "../Components/CustomeNodes/Resizable";
+import ConditonNode from "../Components/CustomeNodes/ConditionBlock";
 import useStore from "./store";
 
 import ReactFlow, { FitViewOptions, Background } from "react-flow-renderer";
@@ -12,6 +13,7 @@ const nodeTypes = {
   documentNode: DocumentNode,
   documentBucketNode: DocumentBucketNode,
   resizable: Resizable as FunctionComponent,
+  conditionNode: ConditonNode
 };
 
 

@@ -1,14 +1,16 @@
-// import React, { useCallback, useState } from "react";
-import { Handle, Position } from "react-flow-renderer";
-
 function DocumentBucketNode() {
   return (
-    <div className="border p-4 border-gray-600 rounded-lg bg-white">
-      <Handle type="target" position={Position.Top} id="axc" />
-      <div>Document Bucket</div>
-      {/* <div className="border p-2 border-gray-600 rounded-lg text-sm cursor-pointer">
-        Add sub nodes
-      </div> */}
+    <div className="border border-black">
+      <div className="flex justify-between border-b border-black pb-2">
+        <div className="text-cyan-500 ml-2 flex  text-base">
+          Document Bucket
+        </div>
+        <div
+            className="text-gray-800 text-base font-bold  bg-white rounded-md w-8 border border-gray-600 cursor-pointer hover:bg-gray-300"
+          >
+            +
+        </div>
+      </div> 
     </div>
   );
 }

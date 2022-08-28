@@ -15,6 +15,10 @@ import {
 
 } from "react-flow-renderer";
 
+// interface NodeParent extends Node {
+//   extent: string
+// }
+
 const initialNodes: Node[] = [];
 
 const initialEdges: Edge[] = [];
