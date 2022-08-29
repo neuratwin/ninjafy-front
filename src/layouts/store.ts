@@ -11,8 +11,6 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
-
-
 } from "react-flow-renderer";
 
 // interface NodeParent extends Node {
@@ -27,9 +25,11 @@ type RFState = {
   nodes: Node[];
   edges: Edge[];
   setNodes: (node: Node) => void;
+  reset: ()=>void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
+  deleteNode: (id:string)=>void;
 };
 
 
@@ -38,9 +38,19 @@ type RFState = {
 const useStore = create<RFState>((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
+  reset : () => {
+    set(() => ({
+      nodes: [],
+    }));
+  },
   setNodes: (node: Node) => {
     set((state) => ({
       nodes: [...state.nodes, node],
+    }));
+  },
+  deleteNode: (id: string) => {
+    set((state) => ({
+      nodes: state.nodes.filter(item=>item.id !== id),
     }));
   },
   onNodesChange: (changes: NodeChange[]) => {

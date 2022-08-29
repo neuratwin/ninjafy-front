@@ -29,8 +29,9 @@ export function documentSubNodeDetails (documentBucketId:string):Node {
   type: "documentNode",
   data: { value: 123 },
   position: { x: Math.random() * 100, y: Math.random() * 100 },
-  parentNode: documentBucketId,
- extent: 'parent'
+  parentNode: documentBucketId, 
+  // expandParent: true,
+  extent: 'parent',
  })
 };
 
@@ -40,10 +41,11 @@ export function conditionNodeDetails ():Node[]{
   data: { label: <div className="text-lg text-cyan-600"> Approved? </div> },
   position: { x: Math.random() * 100, y: Math.random() * 100 }
   },  
-  { id: `${Math.random()}`,
-  data: { label: <div className="text-lg text-cyan-600"> Upload to Doc Control </div> },
-  position: { x: Math.random() * 200, y: Math.random() * 200 }
-  }])
+  // { id: `${Math.random()}`,
+  // data: { label: <div className="text-lg text-cyan-600"> Upload to Doc Control </div> },
+  // position: { x: Math.random() * 200, y: Math.random() * 200 }
+  // }
+])
 }
 
 // export function bucketCreatorDetails1 ():Node {
@@ -62,7 +64,7 @@ export function bucketCreatorDetails(bucketId:string, addSubNode:any): Node {
     data: {
       label: (
         <div className="flex justify-between border-b border-black pb-2">
-        <div className="text-cyan-500 ml-2 flex  text-base">
+        <div className="text-gray-500 ml-2 flex  text-base">
           Document Bucket
           </div>
           <div

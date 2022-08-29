@@ -1,30 +1,32 @@
 import { useCallback, useState, ChangeEvent } from "react";
-import { Handle, Position } from "react-flow-renderer";
+import { Handle, Position, NodeProps, Node } from "react-flow-renderer";
+import useStore from "../../layouts/store";
 
-
-function DocumentNode() {
+function DocumentNode({id, data}:NodeProps<Node>) {
   const [documentId, setDocumentId] = useState<string | null>();
   
-
+  const deleteNode = useStore((state) => state.deleteNode);
 
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     setDocumentId(evt.target.value);
   }, []);
 
-  
-
-
   return (
     <div
-    className="resize"
-    >
+    className="resize">
     <div className="border p-2 border-gray-600 rounded-lg text-sm bg-white ">
-      <Handle type="target" position={Position.Top} />
+      <Handle
+      style ={{width:"10px", height:"10px"}}
+      type="target" position={Position.Top} />
       <div>
+      <div 
+      onClick={()=>deleteNode(id)}
+        className="absolute -mt-4 ml-28 w-4 h-4 rounded-full bg-gray-400 text-white cursor-pointer flex justify-center items-center hover:bg-red-500">
+          X
+      </div>
         {documentId ? documentId.split("\\").pop() : ""}
         {!documentId && (
-          <div>
-          
+          <div>          
             <label htmlFor="text" className="block text-sm">
               File link
             </label>
@@ -50,7 +52,10 @@ function DocumentNode() {
           </div>
         )}
       </div>
-      <Handle type="source" position={Position.Bottom} id="b" />
+      <Handle 
+      style ={{width:"10px", height:"10px"}}
+      type="source" position={Position.Bottom} id="b" />
+
     </div>
     </div>
   );

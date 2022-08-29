@@ -6,7 +6,7 @@ import Resizable from "../Components/CustomeNodes/Resizable";
 import ConditonNode from "../Components/CustomeNodes/ConditionBlock";
 import useStore from "./store";
 
-import ReactFlow, { FitViewOptions, Background } from "react-flow-renderer";
+import ReactFlow, { FitViewOptions, Background, Controls } from "react-flow-renderer";
 import RightPanel from "../layouts/RightPanel";
 
 const nodeTypes = {
@@ -42,9 +42,11 @@ function Main() {
               fitViewOptions={fitViewOptions}
             >
               <Background gap={30} size={1} color="#c8c8c8" />
+              < Controls />
             </ReactFlow>
           </div>
           <div className="w-64 border-l border-gray-600">
+
             <RightPanel />
           </div>
         </div>

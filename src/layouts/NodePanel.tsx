@@ -6,7 +6,7 @@ import { resizeDetails,
   documentSubNodeDetails, 
   bucketCreatorDetails,
   conditionNodeDetails } from "../utils/NodeDetails";
-  import {Node} from "react-flow-renderer";
+ import {Node} from "react-flow-renderer";
 
 
 const NodePanel = () => {
@@ -22,7 +22,7 @@ const NodePanel = () => {
   setNodes(resizeDetails())
   }
 
-  const clickHandler = () => {
+  const addDocumentNode = () => {
     setNodes(documentDetails());
   };
 
@@ -42,16 +42,14 @@ const NodePanel = () => {
     })
   };
 
-
-  
-const typesOfNodes:TypeOfNode[] = [{clickFnc:clickHandler, label: "Document Node"},
+const typesOfNodes:TypeOfNode[] = [{clickFnc:addDocumentNode, label: "Document Node"},
                       {clickFnc:bucketCreator, label: "Document Bucket"},
                       {clickFnc: addResizableBlock, label:"Resizable Node"},
                       {clickFnc: conditionCreator, label:"Condition Block"}]
 
   return (
     <div className="flex-row">
-      <div className="text-center font-bold text-cyan-500">
+      <div className="text-center font-bold text-gray-800">
         Nodes
       </div>
         {typesOfNodes.map(({clickFnc, label})=>(<NodeAddButton key={label} clickFnc={clickFnc} label={label}/>))}
