@@ -26,6 +26,7 @@ type RFState = {
   nodes: Node[];
   edges: Edge[];
   setNodes: (node: Node) => void;
+  setEdges: (edge: Edge) => void;
   reset: ()=>void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
@@ -49,6 +50,11 @@ const useStore = create<RFState>((set, get) => ({
       nodes: [...state.nodes, node],
     }));
   },
+  setEdges: (edge: Edge) => {
+    set((state) => ({
+      edges: [...state.edges, edge],
+    }));
+  },
   deleteNode: (id: string) => {
     set((state) => ({
       nodes: state.nodes.filter(item=>item.id !== id),
@@ -68,9 +74,9 @@ const useStore = create<RFState>((set, get) => ({
   onConnect: (connection: Connection) => {
     console.log("i am rendering now")
 
-    set({
-      edges: addEdge(connection, get().edges),
-    });
+    set((state)=> ({
+      edges: addEdges(connection, get(edge))
+    }));
 
   },
 }));
