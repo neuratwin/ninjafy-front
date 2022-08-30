@@ -12,6 +12,7 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
+  MarkerType
 } from "react-flow-renderer";
 
 // interface NodeParent extends Node {
@@ -72,12 +73,12 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
   onConnect: (connection: Connection) => {
-    console.log("i am rendering now")
 
-    set((state)=> ({
-      edges: addEdges(connection, get(edge))
+    set(()=> ({
+      edges: addEdge({...connection, type: 'smoothstep', label: "file connection", markerEnd: {
+        type: MarkerType.Arrow,
+      },}, get().edges)
     }));
-
   },
 }));
 

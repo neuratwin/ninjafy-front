@@ -24,8 +24,6 @@ const fitViewOptions: FitViewOptions = {
 function Main() {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore();
 
-
-
   return (
     <>
       <div className="h-screen flex-row border-black">
