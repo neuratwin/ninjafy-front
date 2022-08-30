@@ -34,7 +34,7 @@ function DocumentNode({id, data}:NodeProps<Node>) {
               type="file"
               id="avatar"
               name="avatar"
-              accept="image/png, image/jpeg"
+              accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"
               className="text-xs border-2 rounded-lg opacity-0 absolute"
               onChange={onChange}
             />

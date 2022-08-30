@@ -1,3 +1,4 @@
+// import { useCallback } from "react";
 import create from "zustand";
 import {
   Connection,
@@ -58,15 +59,19 @@ const useStore = create<RFState>((set, get) => ({
       nodes: applyNodeChanges(changes, get().nodes),
     });
   },
+
   onEdgesChange: (changes: EdgeChange[]) => {
     set({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
   onConnect: (connection: Connection) => {
+    console.log("i am rendering now")
+
     set({
       edges: addEdge(connection, get().edges),
     });
+
   },
 }));
 

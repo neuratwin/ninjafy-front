@@ -16,11 +16,11 @@ const NodePanel = () => {
   }
 
   const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
-  const setNodes = useStore((state) => state.setNodes);
+  const setNodes = useStore((state) =>state.setNodes);
 
   const addResizableBlock = () => {
   setNodes(resizeDetails())
-  }
+  };
 
   const addDocumentNode = () => {
     setNodes(documentDetails());
