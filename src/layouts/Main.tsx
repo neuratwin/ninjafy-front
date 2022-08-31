@@ -5,17 +5,25 @@ import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
 import Resizable from "../Components/CustomeNodes/Resizable";
 import ConditonNode from "../Components/CustomeNodes/ConditionBlock";
 import useStore from "./store";
+import { CustomEdgeButton } from "../Components/CustomLinks/CustomLinkButton";
 
-import ReactFlow, { FitViewOptions, Background, Controls } from "react-flow-renderer";
+import ReactFlow, {
+  FitViewOptions,
+  Background,
+  Controls,
+} from "react-flow-renderer";
 import RightPanel from "../layouts/RightPanel";
 
 const nodeTypes = {
   documentNode: DocumentNode,
   documentBucketNode: DocumentBucketNode,
   resizable: Resizable as FunctionComponent,
-  conditionNode: ConditonNode
+  conditionNode: ConditonNode,
 };
 
+const edgeTypes = {
+  deletableEdge: CustomEdgeButton,
+};
 
 const fitViewOptions: FitViewOptions = {
   padding: 0.2,
@@ -39,14 +47,14 @@ function Main() {
               onEdgesChange={onEdgesChange}
               onConnect={onConnect}
               nodeTypes={nodeTypes}
+              edgeTypes={edgeTypes}
               fitViewOptions={fitViewOptions}
             >
               <Background gap={30} size={1} color="#c8c8c8" />
-              < Controls />
+              <Controls />
             </ReactFlow>
           </div>
           <div className="w-64 border-l border-gray-600">
-
             <RightPanel />
           </div>
         </div>

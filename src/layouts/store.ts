@@ -12,7 +12,7 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
-  MarkerType
+  // MarkerType,
 } from "react-flow-renderer";
 
 // interface NodeParent extends Node {
@@ -28,20 +28,19 @@ type RFState = {
   edges: Edge[];
   setNodes: (node: Node) => void;
   setEdges: (edge: Edge) => void;
-  reset: ()=>void;
+  reset: () => void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  deleteNode: (id:string)=>void;
+  deleteNode: (id: string) => void;
+  deleteEdge: (id: string) => void;
 };
-
-
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 const useStore = create<RFState>((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
-  reset : () => {
+  reset: () => {
     set(() => ({
       nodes: [],
     }));
@@ -58,7 +57,12 @@ const useStore = create<RFState>((set, get) => ({
   },
   deleteNode: (id: string) => {
     set((state) => ({
-      nodes: state.nodes.filter(item=>item.id !== id),
+      nodes: state.nodes.filter((item) => item.id !== id),
+    }));
+  },
+  deleteEdge: (id: string) => {
+    set((state) => ({
+      edges: state.edges.filter((item) => item.id !== id),
     }));
   },
   onNodesChange: (changes: NodeChange[]) => {
@@ -73,11 +77,8 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
   onConnect: (connection: Connection) => {
-
-    set(()=> ({
-      edges: addEdge({...connection, type: 'smoothstep', label: "file connection", markerEnd: {
-        type: MarkerType.Arrow,
-      },}, get().edges)
+    set(() => ({
+      edges: addEdge({ ...connection, type: "deletableEdge" }, get().edges),
     }));
   },
 }));
