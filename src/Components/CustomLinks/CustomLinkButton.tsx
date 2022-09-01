@@ -1,7 +1,8 @@
 import useStore from "../../layouts/store";
 import {
   EdgeSmoothStepProps,
-  getBezierPath,
+  // getBezierPath,
+  getSmoothStepPath,
   getEdgeCenter,
   getMarkerEnd,
 } from "react-flow-renderer";
@@ -19,7 +20,7 @@ export function CustomEdgeButton({
   style = {},
   data,
 }: EdgeSmoothStepProps) {
-  const edgePath = getBezierPath({
+  const edgePath = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,

@@ -1,5 +1,7 @@
 // import { useCallback } from "react";
-import create from "zustand";
+import create  from "zustand";
+import {persist } from "zustand/middleware"
+
 import {
   Connection,
   Edge,
@@ -12,7 +14,7 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
-  // MarkerType,
+  MarkerType,
 } from "react-flow-renderer";
 
 // interface NodeParent extends Node {
@@ -36,13 +38,20 @@ type RFState = {
   deleteEdge: (id: string) => void;
 };
 
+
+
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
-const useStore = create<RFState>((set, get) => ({
+const useStore =  create<RFState>()(
+  persist (
+  (set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
   reset: () => {
     set(() => ({
       nodes: [],
+    }));
+    set(() => ({
+      edges: [],
     }));
   },
   setNodes: (node: Node) => {
@@ -59,6 +68,9 @@ const useStore = create<RFState>((set, get) => ({
     set((state) => ({
       nodes: state.nodes.filter((item) => item.id !== id),
     }));
+    set((state) => ({
+      nodes: state.nodes.filter((item) => item.parentNode !== id),
+    }));
   },
   deleteEdge: (id: string) => {
     set((state) => ({
@@ -69,18 +81,38 @@ const useStore = create<RFState>((set, get) => ({
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     });
+  
+
+
   },
 
   onEdgesChange: (changes: EdgeChange[]) => {
     set({
       edges: applyEdgeChanges(changes, get().edges),
     });
+        if (changes[0].type ) {
+      if (changes[0].type=== 'select') {
+        if (changes[0].selected===false)
+       { const EdgeId=changes[0].id
+        get().edges[get().edges.findIndex(edge=>edge.id === EdgeId)]["type"] = "smoothstep";
+        get().edges[get().edges.findIndex(edge=>edge.id === EdgeId)]["animated"] = false;}
+        if (changes[0].selected===true)
+        { const EdgeId=changes[0].id
+         get().edges[get().edges.findIndex(edge=>edge.id === EdgeId)]["type"] = "deletableEdge";
+         get().edges[get().edges.findIndex(edge=>edge.id === EdgeId)]["animated"] = true;
+        }
+      }
+    }
   },
   onConnect: (connection: Connection) => {
     set(() => ({
-      edges: addEdge({ ...connection, type: "deletableEdge" }, get().edges),
+      edges: addEdge({ ...connection, type: "smoothstep",  markerEnd: {
+        type: MarkerType.Arrow,
+      }, }, get().edges),
     }));
   },
-}));
+}),
+{name: "suth-store"})
+);
 
 export default useStore;

@@ -1,11 +1,13 @@
-import { useState, MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import useStore from "./store";
 import NodeAddButton from "../Components/NodeAddButton";
 import { resizeDetails, 
   documentDetails, 
-  documentSubNodeDetails, 
-  bucketCreatorDetails,
-  conditionNodeDetails } from "../utils/NodeDetails";
+  // documentSubNodeDetails, 
+  // bucketCreatorDetails,
+  conditionNodeDetails,
+  informationNodeDetails,
+documentBucketNode } from "../utils/NodeDetails";
  import {Node} from "react-flow-renderer";
 
 
@@ -15,8 +17,8 @@ const NodePanel = () => {
     label: string
   }
 
-  const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
-  const setNodes = useStore((state) =>state.setNodes);
+  // const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
+  const [setNodes] = useStore((state) =>[state.setNodes]);
 
   const addResizableBlock = () => {
   setNodes(resizeDetails())
@@ -26,13 +28,16 @@ const NodePanel = () => {
     setNodes(documentDetails());
   };
 
-  const addSubNode = (documentBucketId: string) => {
-    setNodes(documentSubNodeDetails(documentBucketId));
-  };
+  // const addSubNode = (documentBucketId: string) => {
+  //   setNodes(documentSubNodeDetails(documentBucketId));
+  // };
 
+  // const bucketCreator = () => {
+  //   setBucketId(`${Math.random()}`);
+  //   setNodes(bucketCreatorDetails(bucketId, addSubNode, deleteNode ));
+  // };
   const bucketCreator = () => {
-    setBucketId(`${Math.random()}`);
-    setNodes(bucketCreatorDetails(bucketId,addSubNode ));
+    setNodes(documentBucketNode());
   };
 
   const conditionCreator = () => {
@@ -42,10 +47,16 @@ const NodePanel = () => {
     })
   };
 
+  const informationNodeCreator = () => {
+    setNodes(informationNodeDetails());
+  }
+
 const typesOfNodes:TypeOfNode[] = [{clickFnc:addDocumentNode, label: "Document Node"},
                       {clickFnc:bucketCreator, label: "Document Bucket"},
                       {clickFnc: addResizableBlock, label:"Resizable Node"},
-                      {clickFnc: conditionCreator, label:"Condition Block"}]
+                      {clickFnc: conditionCreator, label:"Condition Block"},
+                      {clickFnc: informationNodeCreator, label:"Information Block"}
+                    ]
 
   return (
     <div className="flex-row">

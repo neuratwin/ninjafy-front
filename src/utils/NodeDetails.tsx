@@ -38,9 +38,11 @@ export function documentSubNodeDetails (documentBucketId:string):Node {
 export function conditionNodeDetails ():Node[]{
   return ([{
     id: `${Math.random()}`,
-  data: { label: <div className="text-lg text-cyan-600"> Approved? </div> },
-  position: { x: Math.random() * 100, y: Math.random() * 100 }
-  },  
+    type: "conditionNode",
+    data: { value: 123 },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+ 
+   },  
   // { id: `${Math.random()}`,
   // data: { label: <div className="text-lg text-cyan-600"> Upload to Doc Control </div> },
   // position: { x: Math.random() * 200, y: Math.random() * 200 }
@@ -48,17 +50,26 @@ export function conditionNodeDetails ():Node[]{
 ])
 }
 
-// export function bucketCreatorDetails1 ():Node {
-//   return ({
-//    id: `${Math.random()}`,
-//    type: "documentBucketNode",
-//    data: { value: 123 },
-//    position: { x: Math.random() * 100, y: Math.random() * 100 },
+export function informationNodeDetails ():Node {
+  return ({
+   id: `${Math.random()}`,
+   type: "informationNode",
+   data: { value: 123 },
+   position: { x: Math.random() * 100, y: Math.random() * 100 },
 
-//   })
-//  };
+  })
+ };
 
-export function bucketCreatorDetails(bucketId:string, addSubNode:any): Node {
+ export function documentBucketNode ():Node {
+  return ({
+   id: `${Math.random()}`,
+   type: "documentBucketNode",
+   data: { value: 123   },
+   position: { x: Math.random() * 100, y: Math.random() * 100 },
+  })
+ };
+
+export function bucketCreatorDetails(bucketId:string, addSubNode:any, deleteNode: any): Node {
   return({
     id: bucketId,
     data: {
@@ -67,6 +78,11 @@ export function bucketCreatorDetails(bucketId:string, addSubNode:any): Node {
         <div className="text-gray-500 ml-2 flex  text-base">
           Document Bucket
           </div>
+          <div
+        onClick={()=>deleteNode(bucketId)} 
+        className="bg-gray-800 w-12 text-center rounded-lg text-xs text-white cursor-pointer my-2">Delete</div>
+      
+
           <div
             onClick={() => addSubNode(bucketId)}
             className="text-gray-800 text-base font-bold  bg-white rounded-md w-8 border border-gray-600 cursor-pointer hover:bg-gray-300"

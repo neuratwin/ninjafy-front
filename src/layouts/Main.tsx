@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useCallback, DragEvent  } from "react";
 import SearchBar from "../Components/SearchBar";
 import DocumentNode from "../Components/CustomeNodes/DocumentNode";
 import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
@@ -6,6 +6,7 @@ import Resizable from "../Components/CustomeNodes/Resizable";
 import ConditonNode from "../Components/CustomeNodes/ConditionBlock";
 import useStore from "./store";
 import { CustomEdgeButton } from "../Components/CustomLinks/CustomLinkButton";
+import InformationNode from "../Components/CustomeNodes/InformationNode";
 
 import ReactFlow, {
   FitViewOptions,
@@ -19,6 +20,7 @@ const nodeTypes = {
   documentBucketNode: DocumentBucketNode,
   resizable: Resizable as FunctionComponent,
   conditionNode: ConditonNode,
+  informationNode: InformationNode,
 };
 
 const edgeTypes = {
@@ -31,6 +33,12 @@ const fitViewOptions: FitViewOptions = {
 
 function Main() {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore();
+
+  const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
 
   return (
     <>
@@ -49,6 +57,7 @@ function Main() {
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
               fitViewOptions={fitViewOptions}
+              onDragOver={onDragOver}
             >
               <Background gap={30} size={1} color="#c8c8c8" />
               <Controls />
