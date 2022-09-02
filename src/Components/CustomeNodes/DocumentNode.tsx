@@ -1,62 +1,60 @@
 import { useCallback, useState, ChangeEvent } from "react";
 import { Handle, Position, NodeProps, Node } from "react-flow-renderer";
-import useStore from "../../layouts/store";
+import SideNodePanel from "../SideNodePanel";
 
-function DocumentNode({id, data}:NodeProps<Node>) {
+function DocumentNode({ id, data }: NodeProps<Node>) {
   const [documentId, setDocumentId] = useState<string | null>();
-  
-  const deleteNode = useStore((state) => state.deleteNode);
 
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     setDocumentId(evt.target.value);
   }, []);
 
   return (
-    <div
-    className="resize">
-    <div className="border p-2 border-gray-600 rounded-lg text-sm bg-white ">
-      <Handle
-      style ={{width:"10px", height:"10px"}}
-      type="target" position={Position.Top} />
-      <div>
-      <div 
-      onClick={()=>deleteNode(id)}
-        className="absolute -mt-4 ml-28 w-4 h-4 rounded-full bg-gray-400 text-white cursor-pointer flex justify-center items-center hover:bg-red-500">
-          X
-      </div>
-        {documentId ? documentId.split("\\").pop() : ""}
-        {!documentId && (
-          <div>          
-            <label htmlFor="text" className="block text-sm">
-              File link
-            </label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"
-              className="text-xs border-2 rounded-lg opacity-0 absolute"
-              onChange={onChange}
-            />
-            <div className="border border-gray-700 p-2 rounded-lg text-sm">
-              Upload your file
+    <div className="flex">
+      <div className="border p-2 border-gray-600 rounded-lg text-sm bg-white ">
+        <Handle
+          style={{ width: "10px", height: "10px" }}
+          type="target"
+          position={Position.Top}
+        />
+        <div>
+          {documentId ? documentId.split("\\").pop() : ""}
+          {!documentId && (
+            <div>
+              <label htmlFor="text" className="block text-sm">
+                File link
+              </label>
+              <div>
+                <div className=" text-center border w-32 border-gray-700 p-2 rounded-lg text-sm">
+                  Upload your file
+                </div>
+                <div>
+                  <input
+                    type="file"
+                    id="avatar"
+                    name="avatar"
+                    accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"
+                    className="opacity-0 w-32 -mt-8 absolute text-xs border-2 rounded-lg"
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+              <div className="flex ">
+                <div className="absolute ml-28 cursor-nwse-resize opacity-0">
+                  ++
+                </div>
+              </div>
             </div>
-            <div 
-            className="flex ">
-              <div
-
-              className="absolute ml-28 cursor-nwse-resize opacity-0">
-              ++
-              </div>
-              </div>
-          </div>
-        )}
+          )}
+        </div>
+        <Handle
+          style={{ width: "10px", height: "10px" }}
+          type="source"
+          position={Position.Bottom}
+          id="b"
+        />
       </div>
-      <Handle 
-      style ={{width:"10px", height:"10px"}}
-      type="source" position={Position.Bottom} id="b" />
-
-    </div>
+      <SideNodePanel id={id} />
     </div>
   );
 }

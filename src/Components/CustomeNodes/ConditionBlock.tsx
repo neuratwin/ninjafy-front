@@ -1,26 +1,21 @@
-import {Handle, Position, NodeProps, Node} from "react-flow-renderer";
-import useStore from "../../layouts/store";
+import { Handle, Position, NodeProps, Node } from "react-flow-renderer";
+import SideNodePanel from "../SideNodePanel";
 
-
-function ConditonNode({id, data}:NodeProps<Node> ) {
-  const deleteNode = useStore((state)=>state.deleteNode)
-
+function ConditonNode({ id, data }: NodeProps<Node>) {
   return (
-    <div>
-    <Handle type="target" position={Position.Top} id="xatop"/>
-   
-      <div className="border border-black p-2 rounded-lg text-cyan-600">
-      <div
-        onClick={()=>deleteNode(id)} 
-        className="bg-gray-800 w-12 text-center rounded-lg text-xs text-white cursor-pointer my-2">
-          Delete
-      </div>
-        Condition Approved ?
-      </div>
+    <div className="flex">
+      <div>
+        <Handle type="target" position={Position.Top} id="xatop" />
 
-      <Handle type="source" position={Position.Bottom} id="xab" />
+        <div className="border border-black p-2 rounded-lg text-cyan-600">
+          Condition Approved ?
+        </div>
+
+        <Handle type="source" position={Position.Bottom} id="xab" />
       </div>
-    );
+      <SideNodePanel id={id} />
+    </div>
+  );
 }
 
 export default ConditonNode;

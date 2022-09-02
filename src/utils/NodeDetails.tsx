@@ -69,6 +69,15 @@ export function informationNodeDetails ():Node {
   })
  };
 
+ export function emailNode ():Node {
+  return ({
+   id: `${Math.random()}`,
+   type: "emailNode",
+   data: { text: "hi how are you"   },
+   position: { x: Math.random() * 100, y: Math.random() * 100 },
+  })
+ };
+
 export function bucketCreatorDetails(bucketId:string, addSubNode:any, deleteNode: any): Node {
   return({
     id: bucketId,

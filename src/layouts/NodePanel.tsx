@@ -7,7 +7,8 @@ import { resizeDetails,
   // bucketCreatorDetails,
   conditionNodeDetails,
   informationNodeDetails,
-documentBucketNode } from "../utils/NodeDetails";
+  documentBucketNode,
+  emailNode } from "../utils/NodeDetails";
  import {Node} from "react-flow-renderer";
 
 
@@ -23,6 +24,10 @@ const NodePanel = () => {
   const addResizableBlock = () => {
   setNodes(resizeDetails())
   };
+
+  const addEmailNode = () => {
+    setNodes(emailNode())
+    };
 
   const addDocumentNode = () => {
     setNodes(documentDetails());
@@ -55,7 +60,8 @@ const typesOfNodes:TypeOfNode[] = [{clickFnc:addDocumentNode, label: "Document N
                       {clickFnc:bucketCreator, label: "Document Bucket"},
                       {clickFnc: addResizableBlock, label:"Resizable Node"},
                       {clickFnc: conditionCreator, label:"Condition Block"},
-                      {clickFnc: informationNodeCreator, label:"Information Block"}
+                      {clickFnc: informationNodeCreator, label:"Information Block"},
+                      {clickFnc: addEmailNode, label:"Email Node"}
                     ]
 
   return (

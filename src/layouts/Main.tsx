@@ -4,6 +4,7 @@ import DocumentNode from "../Components/CustomeNodes/DocumentNode";
 import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
 import Resizable from "../Components/CustomeNodes/Resizable";
 import ConditonNode from "../Components/CustomeNodes/ConditionBlock";
+import EmailNode from "../Components/CustomeNodes/EmailNode";
 import useStore from "./store";
 import { CustomEdgeButton } from "../Components/CustomLinks/CustomLinkButton";
 import InformationNode from "../Components/CustomeNodes/InformationNode";
@@ -21,6 +22,8 @@ const nodeTypes = {
   resizable: Resizable as FunctionComponent,
   conditionNode: ConditonNode,
   informationNode: InformationNode,
+  emailNode: EmailNode as FunctionComponent,
+
 };
 
 const edgeTypes = {

@@ -6,10 +6,10 @@ import {
   Node,
   Position,
 } from "react-flow-renderer";
-
+import { MdSend } from "react-icons/md";
 import SideNodePanel from "../SideNodePanel";
 
-export default function Resizable({
+export default function EmailNode({
   id,
   data,
   selected,
@@ -18,7 +18,7 @@ export default function Resizable({
   targetPosition,
 }: Node) {
   const nodeRef = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState({ width: 300, height: 150 });
+  const [size, setSize] = useState({ width: 300, height: 550 });
   const [transform, setTransform] = useState("none");
   const updateNodeInternals = useUpdateNodeInternals();
 
@@ -78,31 +78,41 @@ export default function Resizable({
   return (
     <div className="flex">
       <div ref={nodeRef} style={style}>
-        <div></div>
+        <Handle position={sourcePosition ?? Position.Top} type="source" />
+        <div>
+          <div className="flex space-x-2">
+            <div>
+              <div className="flex items-center font-bold justify-center w-8 h-8 text-gray-800 text-base  bg-white rounded-md border border-gray-600 cursor-pointer hover:bg-gray-300">
+                <MdSend />
+              </div>
+            </div>
+          </div>
+        </div>
+        <label>to:</label>
         <input
           type="text"
-          placeholder="Node Name"
           className=" text-black p-2 flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  border focus:outline-none"
         ></input>
+        <label>cc:</label>
+        <input
+          type="text"
+          className=" text-black p-2 flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  border focus:outline-none"
+        ></input>
+        <label>bcc:</label>
+        <input
+          type="text"
+          className=" text-black p-2 flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  border focus:outline-none"
+        ></input>
+        <label>Message:</label>
         <textarea
-          style={{
-            width: "100%",
-            height: "100%",
-            resize: "none",
-            backgroundColor: "rgba(255, 255, 255, 0)",
-            color: "black",
-            padding: 5,
-            fontSize: 18,
-            boxSizing: "border-box",
-            outline: "none",
-            border: "none",
-          }}
+          className="w-full h-1/2 rounded-lg"
           defaultValue={data?.text}
         />
-        <Handle position={sourcePosition ?? Position.Top} type="target" />
-        <Handle position={targetPosition ?? Position.Bottom} type="source" />
+        <Handle position={targetPosition ?? Position.Bottom} type="target" />
       </div>
-      <SideNodePanel id={id} />
+      <div>
+        <SideNodePanel id={id} />
+      </div>
     </div>
   );
 }
