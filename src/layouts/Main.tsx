@@ -1,4 +1,10 @@
-import { FunctionComponent, useCallback, DragEvent  } from "react";
+import {
+  FunctionComponent,
+  useCallback,
+  DragEvent,
+  useRef,
+  useState,
+} from "react";
 import SearchBar from "../Components/SearchBar";
 import DocumentNode from "../Components/CustomeNodes/DocumentNode";
 import DocumentBucketNode from "../Components/CustomeNodes/DocumentBucketNode";
@@ -23,7 +29,6 @@ const nodeTypes = {
   conditionNode: ConditonNode,
   informationNode: InformationNode,
   emailNode: EmailNode as FunctionComponent,
-
 };
 
 const edgeTypes = {
@@ -35,13 +40,47 @@ const fitViewOptions: FitViewOptions = {
 };
 
 function Main() {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore();
+  const reactFlowWrapper = useRef<HTMLDivElement>(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
+  const { nodes, edges, setNodes, onNodesChange, onEdgesChange, onConnect } =
+    useStore();
 
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer.dropEffect = "move";
   }, []);
 
+  const onDrop = useCallback(
+    (event: DragEvent<HTMLDivElement>) => {
+      event.preventDefault();
+
+      if (!reactFlowWrapper.current) {
+        return;
+      } else {
+        const reactFlowBounds =
+          reactFlowWrapper.current.getBoundingClientRect();
+        const type = event.dataTransfer.getData("application/reactflow");
+
+        // check if the dropped element is valid
+        if (typeof type === "undefined" || !type) {
+          return;
+        }
+
+        const position = reactFlowInstance.project({
+          x: event.clientX - reactFlowBounds.left,
+          y: event.clientY - reactFlowBounds.top,
+        });
+        const newNode = {
+          id: `${Math.random()}`,
+          type,
+          position,
+          data: { label: `${type} node` },
+        };
+        setNodes(newNode);
+      }
+    },
+    [reactFlowInstance, setNodes]
+  );
 
   return (
     <>
@@ -50,7 +89,10 @@ function Main() {
           <SearchBar />
         </div>
         <div className="flex" id="moveableContainer">
-          <div style={{ width: "95%", height: "calc(100vh - 4rem)" }}>
+          <div
+            style={{ width: "95%", height: "calc(100vh - 4rem)" }}
+            ref={reactFlowWrapper}
+          >
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -60,7 +102,9 @@ function Main() {
               nodeTypes={nodeTypes}
               edgeTypes={edgeTypes}
               fitViewOptions={fitViewOptions}
+              onInit={setReactFlowInstance}
               onDragOver={onDragOver}
+              onDrop={onDrop}
             >
               <Background gap={30} size={1} color="#c8c8c8" />
               <Controls />

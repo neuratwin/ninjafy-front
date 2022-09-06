@@ -1,33 +1,35 @@
 import { MouseEventHandler } from "react";
 import useStore from "./store";
 import NodeAddButton from "../Components/NodeAddButton";
-import { resizeDetails, 
-  documentDetails, 
-  // documentSubNodeDetails, 
+import {
+  resizeDetails,
+  documentDetails,
+  // documentSubNodeDetails,
   // bucketCreatorDetails,
   conditionNodeDetails,
   informationNodeDetails,
   documentBucketNode,
-  emailNode } from "../utils/NodeDetails";
- import {Node} from "react-flow-renderer";
-
+  emailNode,
+} from "../utils/NodeDetails";
+import { Node } from "react-flow-renderer";
 
 const NodePanel = () => {
   type TypeOfNode = {
     clickFnc: MouseEventHandler;
-    label: string
-  }
+    label: string;
+    type: string;
+  };
 
   // const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
-  const [setNodes] = useStore((state) =>[state.setNodes]);
+  const [setNodes] = useStore((state) => [state.setNodes]);
 
   const addResizableBlock = () => {
-  setNodes(resizeDetails())
+    setNodes(resizeDetails());
   };
 
   const addEmailNode = () => {
-    setNodes(emailNode())
-    };
+    setNodes(emailNode());
+  };
 
   const addDocumentNode = () => {
     setNodes(documentDetails());
@@ -46,32 +48,53 @@ const NodePanel = () => {
   };
 
   const conditionCreator = () => {
-    const conditionDetails:Node[]= conditionNodeDetails();
-    conditionDetails.forEach((nodeDetails:Node)=>{
-      setNodes(nodeDetails)
-    })
+    const conditionDetails: Node[] = conditionNodeDetails();
+    conditionDetails.forEach((nodeDetails: Node) => {
+      setNodes(nodeDetails);
+    });
   };
 
   const informationNodeCreator = () => {
     setNodes(informationNodeDetails());
-  }
+  };
 
-const typesOfNodes:TypeOfNode[] = [{clickFnc:addDocumentNode, label: "Document Node"},
-                      {clickFnc:bucketCreator, label: "Document Bucket"},
-                      {clickFnc: addResizableBlock, label:"Resizable Node"},
-                      {clickFnc: conditionCreator, label:"Condition Block"},
-                      {clickFnc: informationNodeCreator, label:"Information Block"},
-                      {clickFnc: addEmailNode, label:"Email Node"}
-                    ]
+  const typesOfNodes: TypeOfNode[] = [
+    { clickFnc: addDocumentNode, label: "Document Node", type: "documentNode" },
+    {
+      clickFnc: bucketCreator,
+      label: "Document Bucket",
+      type: "documentBucketNode",
+    },
+    {
+      clickFnc: addResizableBlock,
+      label: "Resizable Node",
+      type: "resizable",
+    },
+    {
+      clickFnc: conditionCreator,
+      label: "Condition Block",
+      type: "conditionNode",
+    },
+    {
+      clickFnc: informationNodeCreator,
+      label: "Information Block",
+      type: "informationNode",
+    },
+    { clickFnc: addEmailNode, label: "Email Node", type: "emailNode" },
+  ];
 
   return (
     <div className="flex-row">
-      <div className="text-center font-bold text-gray-800">
-        Nodes
-      </div>
-        {typesOfNodes.map(({clickFnc, label})=>(<NodeAddButton key={label} clickFnc={clickFnc} label={label}/>))}
+      <div className="text-center font-bold text-gray-800">Nodes</div>
+      {typesOfNodes.map(({ clickFnc, label, type }) => (
+        <NodeAddButton
+          key={label}
+          clickFnc={clickFnc}
+          label={label}
+          type={type}
+        />
+      ))}
     </div>
-    
   );
 };
 
