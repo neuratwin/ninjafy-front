@@ -16,11 +16,7 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
         style={{ backgroundColor: nodeColor }}
         className="border p-2 border-gray-600 rounded-lg text-sm bg-white "
       >
-        <Handle
-          style={{ width: "10px", height: "10px" }}
-          type="target"
-          position={Position.Top}
-        />
+        <Handle type="target" position={Position.Top} />
         <div>
           {documentId ? documentId.split("\\").pop() : ""}
           {!documentId && (
@@ -51,12 +47,7 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
             </div>
           )}
         </div>
-        <Handle
-          style={{ width: "10px", height: "10px" }}
-          type="source"
-          position={Position.Bottom}
-          id="b"
-        />
+        <Handle type="source" position={Position.Bottom} id="b" />
       </div>
       <SideNodePanel
         id={id}

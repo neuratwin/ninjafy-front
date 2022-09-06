@@ -105,7 +105,7 @@ export default function EmailNode({
         ></input>
         <label>Message:</label>
         <textarea
-          className="w-full h-1/2 rounded-lg"
+          className="w-full h-1/2 p-2 rounded-lg"
           defaultValue={data?.text}
         />
         <Handle position={targetPosition ?? Position.Bottom} type="target" />
