@@ -9,7 +9,7 @@ import {
 
 import SideNodePanel from "../SideNodePanel";
 
-export default function Resizable({
+function Resizable({
   id,
   data,
   selected,
@@ -106,3 +106,5 @@ export default function Resizable({
     </div>
   );
 }
+
+export default Resizable;

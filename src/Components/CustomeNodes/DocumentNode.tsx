@@ -4,6 +4,7 @@ import SideNodePanel from "../SideNodePanel";
 
 function DocumentNode({ id, data }: NodeProps<Node>) {
   const [documentId, setDocumentId] = useState<string | null>();
+  const [nodeColor, setNodeColor] = useState<string>("#fff");
 
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     setDocumentId(evt.target.value);
@@ -11,7 +12,10 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
 
   return (
     <div className="flex">
-      <div className="border p-2 border-gray-600 rounded-lg text-sm bg-white ">
+      <div
+        style={{ backgroundColor: nodeColor }}
+        className="border p-2 border-gray-600 rounded-lg text-sm bg-white "
+      >
         <Handle
           style={{ width: "10px", height: "10px" }}
           type="target"
@@ -54,7 +58,11 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
           id="b"
         />
       </div>
-      <SideNodePanel id={id} />
+      <SideNodePanel
+        id={id}
+        nodeColor={nodeColor}
+        setNodeColor={setNodeColor}
+      />
     </div>
   );
 }

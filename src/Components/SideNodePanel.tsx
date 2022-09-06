@@ -1,22 +1,30 @@
+import { Dispatch } from "react";
 import useStore from "../layouts/store";
 import { useState } from "react";
-import { AiFillDelete } from "react-icons/ai";
-import { BiMenuAltRight } from "react-icons/bi";
+import { AiFillDelete, AiOutlineRightSquare } from "react-icons/ai";
 
-const SideNodePanel = ({ id }: { id: string }) => {
-  const [menuState, setMenuState] = useState(true);
+const SideNodePanel = ({
+  id,
+  nodeColor,
+  setNodeColor,
+}: {
+  id: string;
+  nodeColor?: string;
+  setNodeColor?: Dispatch<string>;
+}) => {
+  const [menuState, setMenuState] = useState<boolean>(false);
 
   const deleteNode = useStore((state) => state.deleteNode);
   return (
     <div>
       <div
         onClick={() => setMenuState((state) => !state)}
-        className="absolute rounded-md -ml-4 cursor-pointer hover:bg-gray-300"
+        className="nodrag absolute rounded-md -ml-4 cursor-pointer hover:bg-gray-100 "
       >
-        <BiMenuAltRight />
+        <AiOutlineRightSquare />
       </div>
       {menuState && (
-        <div className=" flex-column space-x-2 border-gray-600 border rounded-sm">
+        <div className="transition-opacity flex-column space-x-2 border-gray-600 border rounded-sm">
           <div
             onClick={() => deleteNode(id)}
             className="p-2 flex items-center  justify-center w-4 h-4  bg-white rounded-md border border-gray-600 cursor-pointer hover:bg-gray-300"
@@ -26,7 +34,16 @@ const SideNodePanel = ({ id }: { id: string }) => {
             </div>
           </div>
           <div className="flex">
-            <input className="-ml-2 w-4" type="color" />
+            {setNodeColor && (
+              <input
+                className="-ml-2 w-4"
+                type="color"
+                onChange={(e) => {
+                  setNodeColor(e.target.value);
+                }}
+                defaultValue={nodeColor ?? "#ffffff"}
+              />
+            )}
           </div>
         </div>
       )}

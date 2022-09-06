@@ -50,8 +50,8 @@ export function CustomEdgeButton({
       <foreignObject
         width={foreignObjectSize}
         height={foreignObjectSize}
-        x={edgeCenterX - foreignObjectSize / 2}
-        y={edgeCenterY - foreignObjectSize / 2}
+        x={edgeCenterX - foreignObjectSize / 2 + 16}
+        y={edgeCenterY - foreignObjectSize / 2 + 6}
         className="edgebutton-foreignobject"
         requiredExtensions="http://www.w3.org/1999/xhtml"
       >
@@ -72,7 +72,7 @@ export function CustomEdgeButton({
             >
               <path
                 d="M5.45998 3.99998L7.99983 6.53983V7.99983H6.53983L3.99998 5.45998L1.46015 7.99983H0.000146866V6.53983L2.53998 3.99998L0 1.46002V2.28882e-05H1.46L3.99998 2.53998L6.53996 0H7.99995V1.46L5.45998 3.99998Z"
-                fill="black"
+                fill="red"
               />
             </svg>
           </span>
