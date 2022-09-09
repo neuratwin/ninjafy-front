@@ -15,7 +15,7 @@ const NodeAddButton = ({ clickFnc, label, type }: NodeButton) => {
   return (
     <div
       onClick={clickFnc}
-      className="text-xs hover:bg-gray-200 border border-gray-600 text-center p-2 m-2  cursor-pointer rounded-lg"
+      className="text-xs hover:bg-gray-100 border-2 border-gray-600 text-center p-2 m-2  cursor-pointer rounded"
       onDragStart={(event) => onDragStart(event, type)}
       draggable
     >

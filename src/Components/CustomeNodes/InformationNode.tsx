@@ -27,14 +27,14 @@ const InformationNode = ({ id, data }: NodeProps<Node>) => {
 
   return (
     <div className="flex">
-      <div className="border-black border p-4 rounded-lg bg-red-500 text-white">
+      <div className="border-black border-2 border p-4 rounded bg-white ">
         <Handle type="target" position={Position.Top} id="nodextop1"></Handle>
         <div className="flex-row space-y-2">
           <div>
             <input
               type="text"
               placeholder="Node Name"
-              className="bg-red-500 placeholder:text-gray-300 placeholder:italic  border-red-500 border focus:outline-none"
+              className="placeholder:text-gray-300 placeholder:italic focus:outline-none"
               value={nodeName}
               onChange={onChangeNodeName}
             ></input>
@@ -42,7 +42,7 @@ const InformationNode = ({ id, data }: NodeProps<Node>) => {
           <div>
             <textarea
               style={{ backgroundColor: "rgba(0,0,0,0)" }}
-              className="outline-none border-0 box-border w-full h-full  text-white focus:outline-none placeholder:text-gray-300 placeholder:italic"
+              className="text-xs text-gray-800 outline-none border-0 box-border w-full h-full focus:outline-none placeholder:text-gray-300 placeholder:italic"
               placeholder="Add node description"
               value={nodeInformation}
               onChange={onChangeInfo}

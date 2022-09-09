@@ -4,20 +4,21 @@ import useStore from "../../layouts/store";
 import { documentSubNodeDetails } from "../../utils/NodeDetails";
 import { AiFillFileAdd } from "react-icons/ai";
 import SideNodePanel from "../SideNodePanel";
+import shallow from "zustand/shallow";
 
 function DocumentBucketNode({ id, data }: NodeProps<Node>) {
-  const [setNodes] = useStore((state) => [state.setNodes]);
+  const setNodes = useStore((state) => state.setNodes, shallow);
   const [bucketName, setBucketName] = useState<string>("Bucket");
 
   return (
     <div className="flex">
-      <div className="border border-black rounded-lg w-64 h-64 bg-gray-100 p-2">
+      <div className="border-2 border-black rounded w-64 h-64 bg-white p-2">
         <Handle type="target" position={Position.Top} />
         <div className="flex justify-around border-b border-black pb-2">
-          <div className="text-gray-500 ml-2 flex  text-base">
+          <div className="text-black ml-2 flex  text-base">
             <input
               type="text"
-              className="bg-gray-100 px-2 focus:outline-none"
+              className="bg-white px-2 focus:outline-none"
               placeholder="Your bucket name ..."
               value={bucketName}
               onChange={(e) => setBucketName(e.target.value)}

@@ -107,7 +107,12 @@ function ReactFlowCanvas() {
         panOnScroll={true}
         panOnScrollMode={PanOnScrollMode.Vertical}
       >
-        <Background gap={30} size={1} color="#c8c8c8" />
+        <Background
+          gap={90}
+          size={1}
+          color="#f8f9fa"
+          style={{ backgroundColor: "#f8f9fa" }}
+        />
         <Controls />
       </ReactFlow>
     </div>

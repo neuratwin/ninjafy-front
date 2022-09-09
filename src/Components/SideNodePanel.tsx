@@ -19,7 +19,7 @@ const SideNodePanel = ({
     <div>
       <div
         onClick={() => setMenuState((state) => !state)}
-        className="nodrag absolute rounded-md -ml-4 cursor-pointer hover:bg-gray-100 "
+        className="nodrag absolute rounded -ml-4 cursor-pointer hover:bg-gray-50 "
       >
         <AiOutlineRightSquare />
       </div>

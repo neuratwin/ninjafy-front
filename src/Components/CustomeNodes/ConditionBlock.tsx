@@ -8,7 +8,7 @@ function ConditonNode({ id, data }: NodeProps<Node>) {
       <div>
         <Handle type="target" position={Position.Top} id="xatop" />
 
-        <div className="border border-black p-2 rounded-lg text-cyan-600">
+        <div className="border-2 border-black p-2 rounded text-cyan-600">
           Condition Approved ?
         </div>
 

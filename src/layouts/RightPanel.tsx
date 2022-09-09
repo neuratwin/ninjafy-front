@@ -5,7 +5,7 @@ import ResetButton from "../Components/CustomeNodes/ResetButton";
 
 const RightPanel = () => {
   return (
-    <div>
+    <div className="border-l border-gray-200 h-full py-2">
       <ResetButton />
       <div className="flex-row space-y-8">
         <NodePanel />

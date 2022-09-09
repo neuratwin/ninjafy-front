@@ -20,18 +20,18 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
     <div className="flex">
       <div
         style={{ backgroundColor: nodeColor }}
-        className="border p-2 border-gray-600 rounded-lg text-sm bg-white "
+        className="border-2 p-2 border-gray-600 rounded text-sm bg-white "
       >
         <Handle type="target" position={Position.Top} />
-        <div>
+        <div className="text-xs text-gray-500">
           {documentName ? documentName.split("\\").pop() : ""}
           {!documentName && (
             <div>
-              <label htmlFor="text" className="block text-sm">
+              <label htmlFor="text" className="block text-xs">
                 File link
               </label>
               <div>
-                <div className=" text-center border w-32 border-gray-700 p-2 rounded-lg text-sm">
+                <div className=" text-center border p-2 w-32 border-gray-700 p rounded text-xs">
                   Upload your file
                 </div>
                 <div>

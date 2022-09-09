@@ -117,7 +117,9 @@ const useStore = create<RFState>()(
               type: "smoothstep",
               markerEnd: {
                 type: MarkerType.Arrow,
+                strokeWidth: 2,
               },
+              style: { stroke: "gray", strokeWidth: 2, maskBorderWidth: 2 },
             },
             get().edges
           ),

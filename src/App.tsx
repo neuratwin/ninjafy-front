@@ -12,7 +12,7 @@ function App() {
       <div className="flex-grow">
         <Main />
       </div>
-      <div className="w-64 border-l border-gray-600">
+      <div className="w-48">
         <RightPanel />
       </div>
     </div>

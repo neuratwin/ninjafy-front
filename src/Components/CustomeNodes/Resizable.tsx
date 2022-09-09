@@ -57,9 +57,7 @@ function Resizable({
       transform,
       width: size.width,
       height: size.height,
-      background: "rgba(240,240,240,0.7)",
       padding: 20,
-      borderRadius: 20,
     }),
 
     [transform, size.width, size.height]
@@ -106,7 +104,8 @@ function Resizable({
   }, [transform, id, updateNodeInternals]);
 
   return (
-    <div className="flex">
+    <div className="flex border-black border-2 rounded bg-white">
+      <Handle position={sourcePosition ?? Position.Top} type="target" />
       <div ref={nodeRef} style={style}>
         <div></div>
         <input
@@ -114,7 +113,7 @@ function Resizable({
           onChange={onChangeNodeName}
           type="text"
           placeholder="Node Name"
-          className=" text-black p-2 flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  border focus:outline-none"
+          className=" text-black flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  focus:outline-none"
         ></input>
         <textarea
           style={{
@@ -122,17 +121,18 @@ function Resizable({
             height: "100%",
             resize: "none",
             backgroundColor: "rgba(255, 255, 255, 0)",
-            color: "black",
-            padding: 5,
-            fontSize: 18,
+            color: "gray",
+            padding: 2,
+            fontSize: 12,
             boxSizing: "border-box",
             outline: "none",
             border: "none",
           }}
           value={nodeInformation}
           onChange={onChangeInfo}
+          placeholder="Insert Information here"
         />
-        <Handle position={sourcePosition ?? Position.Top} type="target" />
+
         <Handle position={targetPosition ?? Position.Bottom} type="source" />
       </div>
       <SideNodePanel id={id} />

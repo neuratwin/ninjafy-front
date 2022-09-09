@@ -80,9 +80,7 @@ function EmailNode({
       transform,
       width: size.width,
       height: size.height,
-      background: "rgba(240,240,240,0.7)",
-      padding: 20,
-      borderRadius: 20,
+      padding: 8,
     }),
 
     [transform, size.width, size.height]
@@ -129,16 +127,13 @@ function EmailNode({
   }, [transform, id, updateNodeInternals]);
 
   return (
-    <div className="flex">
+    <div className="flex  border-black border-2 rounded bg-white">
       <div ref={nodeRef} style={style}>
         <Handle position={sourcePosition ?? Position.Top} type="source" />
-        <div>
-          <div className="flex space-x-2">
-            <div>
-              <div className="flex items-center font-bold justify-center w-8 h-8 text-gray-800 text-base  bg-white rounded-md border border-gray-600 cursor-pointer hover:bg-gray-300">
-                <MdSend />
-              </div>
-            </div>
+
+        <div className="flex space-x-2 p-2">
+          <div className="flex items-center font-bold justify-center w-8 h-8 text-gray-800 text-base  bg-white rounded-md border border-gray-600 cursor-pointer hover:bg-gray-300">
+            <MdSend />
           </div>
         </div>
         <label>to:</label>
@@ -166,7 +161,7 @@ function EmailNode({
         <textarea
           value={messageDetails}
           onChange={onChangeMessage}
-          className="w-full h-1/2 p-2 rounded-lg"
+          className="w-full h-1/2 p-2 rounded-lg border"
         />
         <Handle position={targetPosition ?? Position.Bottom} type="target" />
       </div>
