@@ -1,3 +1,4 @@
+import { memo } from "react";
 import useStore from "../../layouts/store";
 import {
   EdgeSmoothStepProps,
@@ -6,10 +7,11 @@ import {
   getEdgeCenter,
   getMarkerEnd,
 } from "react-flow-renderer";
+import shallow from "zustand/shallow";
 
 const foreignObjectSize = 40;
 
-export function CustomEdgeButton({
+function CustomEdgeButton({
   id,
   sourceX,
   sourceY,
@@ -36,7 +38,7 @@ export function CustomEdgeButton({
     targetY,
   });
 
-  const deleteEdge = useStore((state) => state.deleteEdge);
+  const deleteEdge = useStore((state) => state.deleteEdge, shallow);
 
   return (
     <>
@@ -81,3 +83,5 @@ export function CustomEdgeButton({
     </>
   );
 }
+
+export default memo(CustomEdgeButton);

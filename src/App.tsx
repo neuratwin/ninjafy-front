@@ -1,15 +1,19 @@
 import "./App.css";
 import LeftPanel from "./layouts/LeftPanel";
 import Main from "./layouts/Main";
+import RightPanel from "./layouts/RightPanel";
 
 function App() {
   return (
     <div className="flex h-screen">
-      <div className="w-56">
+      <div className="w-16">
         <LeftPanel />
       </div>
       <div className="flex-grow">
         <Main />
+      </div>
+      <div className="w-64 border-l border-gray-600">
+        <RightPanel />
       </div>
     </div>
   );

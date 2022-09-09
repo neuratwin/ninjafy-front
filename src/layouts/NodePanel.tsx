@@ -1,6 +1,8 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, memo } from "react";
 import useStore from "./store";
 import NodeAddButton from "../Components/NodeAddButton";
+import shallow from "zustand/shallow";
+
 import {
   resizeDetails,
   documentDetails,
@@ -21,7 +23,8 @@ const NodePanel = () => {
   };
 
   // const [bucketId, setBucketId] = useState<string>(`${Math.random()}`);
-  const [setNodes] = useStore((state) => [state.setNodes]);
+  // const setNodes = (e: any) => console.log(1);
+  const [setNodes] = useStore((state) => [state.setNodes], shallow);
 
   const addResizableBlock = () => {
     setNodes(resizeDetails());
@@ -98,4 +101,4 @@ const NodePanel = () => {
   );
 };
 
-export default NodePanel;
+export default memo(NodePanel);

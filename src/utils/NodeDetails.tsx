@@ -1,96 +1,110 @@
 import { Position } from "react-flow-renderer";
-import {Node} from "react-flow-renderer";
+import { Node } from "react-flow-renderer";
 
-export function resizeDetails () :Node{
-  return({
-  id: `${Math.random()}`,
-  position: { x: 100, y: 100 },
-  data: {
-    text: "I am an editable, resizable and rotatable node.",
-    color: "rgba(240,240,240,0.7)",
-  },
-  type: "resizable",
-  sourcePosition: Position.Top,
-  targetPosition: Position.Bottom,
-})
- }
-
- export function documentDetails () :Node{
- return ({
-  id: `${Math.random()}`,
-  type: "documentNode",
-  data: { value: 123 },
-  position: { x: Math.random() * 100, y: Math.random() * 100 },
-})}
-
-export function documentSubNodeDetails (documentBucketId:string):Node {
- return ({
-  id: `${Math.random()}`,
-  type: "documentNode",
-  data: { value: 123 },
-  position: { x: Math.random() * 100, y: Math.random() * 100 },
-  parentNode: documentBucketId, 
-  // expandParent: true,
-  extent: 'parent',
- })
-};
-
-export function conditionNodeDetails ():Node[]{
-  return ([{
+export function resizeDetails(): Node {
+  return {
     id: `${Math.random()}`,
-    type: "conditionNode",
-    data: { value: 123 },
-    position: { x: Math.random() * 100, y: Math.random() * 100 },
- 
-   },  
-  // { id: `${Math.random()}`,
-  // data: { label: <div className="text-lg text-cyan-600"> Upload to Doc Control </div> },
-  // position: { x: Math.random() * 200, y: Math.random() * 200 }
-  // }
-])
+    position: { x: 100, y: 100 },
+    data: {
+      text: "I am an editable, resizable and rotatable node.",
+      color: "rgba(240,240,240,0.7)",
+      nodeName: "",
+      nodeInformation: "",
+    },
+    type: "resizable",
+    sourcePosition: Position.Top,
+    targetPosition: Position.Bottom,
+  };
 }
 
-export function informationNodeDetails ():Node {
-  return ({
-   id: `${Math.random()}`,
-   type: "informationNode",
-   data: { value: 123 },
-   position: { x: Math.random() * 100, y: Math.random() * 100 },
+export function documentDetails(): Node {
+  return {
+    id: `${Math.random()}`,
+    type: "documentNode",
+    data: { value: null },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+  };
+}
 
-  })
- };
+export function documentSubNodeDetails(documentBucketId: string): Node {
+  return {
+    id: `${Math.random()}`,
+    type: "documentNode",
+    data: { value: null },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+    parentNode: documentBucketId,
+    // expandParent: true,
+    extent: "parent",
+  };
+}
 
- export function documentBucketNode ():Node {
-  return ({
-   id: `${Math.random()}`,
-   type: "documentBucketNode",
-   data: { value: 123   },
-   position: { x: Math.random() * 100, y: Math.random() * 100 },
-  })
- };
+export function conditionNodeDetails(): Node[] {
+  return [
+    {
+      id: `${Math.random()}`,
+      type: "conditionNode",
+      data: { value: 123 },
+      position: { x: Math.random() * 100, y: Math.random() * 100 },
+    },
+    // { id: `${Math.random()}`,
+    // data: { label: <div className="text-lg text-cyan-600"> Upload to Doc Control </div> },
+    // position: { x: Math.random() * 200, y: Math.random() * 200 }
+    // }
+  ];
+}
 
- export function emailNode ():Node {
-  return ({
-   id: `${Math.random()}`,
-   type: "emailNode",
-   data: { text: "hi how are you"   },
-   position: { x: Math.random() * 100, y: Math.random() * 100 },
-  })
- };
+export function informationNodeDetails(): Node {
+  return {
+    id: `${Math.random()}`,
+    type: "informationNode",
+    data: { nodeName: "", nodeInformation: "" },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+  };
+}
 
-export function bucketCreatorDetails(bucketId:string, addSubNode:any, deleteNode: any): Node {
-  return({
+export function documentBucketNode(): Node {
+  return {
+    id: `${Math.random()}`,
+    type: "documentBucketNode",
+    data: { value: "Document Bucket" },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+  };
+}
+
+export function emailNode(): Node {
+  return {
+    id: `${Math.random()}`,
+    type: "emailNode",
+    data: {
+      to: "",
+      cc: "",
+      bcc: "",
+      subject: "",
+      message: "",
+    },
+    position: { x: Math.random() * 100, y: Math.random() * 100 },
+  };
+}
+
+export function bucketCreatorDetails(
+  bucketId: string,
+  addSubNode: any,
+  deleteNode: any
+): Node {
+  return {
     id: bucketId,
     data: {
       label: (
         <div className="flex justify-between border-b border-black pb-2">
-        <div className="text-gray-500 ml-2 flex  text-base">
-          Document Bucket
+          <div className="text-gray-500 ml-2 flex  text-base">
+            Document Bucket
           </div>
           <div
-        onClick={()=>deleteNode(bucketId)} 
-        className="bg-gray-800 w-12 text-center rounded-lg text-xs text-white cursor-pointer my-2">Delete</div>
-      
+            onClick={() => deleteNode(bucketId)}
+            className="bg-gray-800 w-12 text-center rounded-lg text-xs text-white cursor-pointer my-2"
+          >
+            Delete
+          </div>
 
           <div
             onClick={() => addSubNode(bucketId)}
@@ -98,7 +112,7 @@ export function bucketCreatorDetails(bucketId:string, addSubNode:any, deleteNode
           >
             +
           </div>
-          </div>  
+        </div>
       ),
     },
     position: { x: Math.random() * 100, y: Math.random() * 100 },
@@ -107,5 +121,5 @@ export function bucketCreatorDetails(bucketId:string, addSubNode:any, deleteNode
       height: 250,
       backgroundColor: "rgba(240,240,240,0.5)",
     },
-  })
+  };
 }

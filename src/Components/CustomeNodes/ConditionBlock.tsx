@@ -1,4 +1,5 @@
 import { Handle, Position, NodeProps, Node } from "react-flow-renderer";
+import { memo } from "react";
 import SideNodePanel from "../SideNodePanel";
 
 function ConditonNode({ id, data }: NodeProps<Node>) {
@@ -18,4 +19,4 @@ function ConditonNode({ id, data }: NodeProps<Node>) {
   );
 }
 
-export default ConditonNode;
+export default memo(ConditonNode);

@@ -3,7 +3,7 @@ import LinkPanel from "./LinkPanel";
 import History from "./History";
 import ResetButton from "../Components/CustomeNodes/ResetButton";
 
-const RightLayout = () => {
+const RightPanel = () => {
   return (
     <div>
       <ResetButton />
@@ -16,4 +16,4 @@ const RightLayout = () => {
   );
 };
 
-export default RightLayout;
+export default RightPanel;

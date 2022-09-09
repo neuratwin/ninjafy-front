@@ -1,13 +1,22 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import {
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  useState,
+  useRef,
+  useMemo,
+  memo,
+} from "react";
 import Moveable from "moveable";
 import {
   Handle,
   useUpdateNodeInternals,
+  NodeProps,
   Node,
   Position,
 } from "react-flow-renderer";
-
 import SideNodePanel from "../SideNodePanel";
+import useStore from "../../layouts/store";
 
 function Resizable({
   id,
@@ -16,11 +25,32 @@ function Resizable({
   dragging,
   sourcePosition,
   targetPosition,
-}: Node) {
+}: NodeProps<Node>) {
   const nodeRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 300, height: 150 });
   const [transform, setTransform] = useState("none");
   const updateNodeInternals = useUpdateNodeInternals();
+
+  const [nodeName, setNodeName] = useState((data as any).nodeName);
+  const [nodeInformation, setNodeInformation] = useState(
+    (data as any).nodeInformation
+  );
+  const setNodeData = useStore((state) => state.setNodeData);
+
+  const onChangeNodeName = useCallback(
+    (evt: ChangeEvent<HTMLInputElement>) => {
+      setNodeName(evt.target.value);
+      setNodeData("nodeName", id, evt.target.value);
+    },
+    [id, setNodeData]
+  );
+  const onChangeInfo = useCallback(
+    (evt: ChangeEvent<HTMLTextAreaElement>) => {
+      setNodeInformation(evt.target.value);
+      setNodeData("nodeInformation", id, evt.target.value);
+    },
+    [id, setNodeData]
+  );
 
   const style = useMemo(
     () => ({
@@ -39,7 +69,6 @@ function Resizable({
     if (!nodeRef.current || !selected || dragging) {
       return;
     }
-
     const moveable = new Moveable(document.body, {
       target: nodeRef.current,
       className: "bg-red-300",
@@ -73,6 +102,7 @@ function Resizable({
 
   useEffect(() => {
     updateNodeInternals(id);
+    return () => updateNodeInternals(id);
   }, [transform, id, updateNodeInternals]);
 
   return (
@@ -80,6 +110,8 @@ function Resizable({
       <div ref={nodeRef} style={style}>
         <div></div>
         <input
+          value={nodeName}
+          onChange={onChangeNodeName}
           type="text"
           placeholder="Node Name"
           className=" text-black p-2 flex w-full rounded-lg placeholder:text-gray-300 placeholder:italic  border focus:outline-none"
@@ -97,7 +129,8 @@ function Resizable({
             outline: "none",
             border: "none",
           }}
-          defaultValue={data?.text}
+          value={nodeInformation}
+          onChange={onChangeInfo}
         />
         <Handle position={sourcePosition ?? Position.Top} type="target" />
         <Handle position={targetPosition ?? Position.Bottom} type="source" />
@@ -107,4 +140,4 @@ function Resizable({
   );
 }
 
-export default Resizable;
+export default memo(Resizable);

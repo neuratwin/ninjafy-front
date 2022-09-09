@@ -1,14 +1,20 @@
-import { useCallback, useState, ChangeEvent } from "react";
+import { useCallback, useState, ChangeEvent, memo } from "react";
 import { Handle, Position, NodeProps, Node } from "react-flow-renderer";
 import SideNodePanel from "../SideNodePanel";
+import useStore from "../../layouts/store";
 
 function DocumentNode({ id, data }: NodeProps<Node>) {
-  const [documentId, setDocumentId] = useState<string | null>();
+  const [documentName, setDocumentName] = useState<string>((data as any).value);
   const [nodeColor, setNodeColor] = useState<string>("#fff");
+  const setNodeData = useStore((state) => state.setNodeData);
 
-  const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    setDocumentId(evt.target.value);
-  }, []);
+  const onChange = useCallback(
+    (evt: ChangeEvent<HTMLInputElement>) => {
+      setDocumentName(evt.target.value);
+      setNodeData("value", id, evt.target.value);
+    },
+    [id, setNodeData]
+  );
 
   return (
     <div className="flex">
@@ -18,8 +24,8 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
       >
         <Handle type="target" position={Position.Top} />
         <div>
-          {documentId ? documentId.split("\\").pop() : ""}
-          {!documentId && (
+          {documentName ? documentName.split("\\").pop() : ""}
+          {!documentName && (
             <div>
               <label htmlFor="text" className="block text-sm">
                 File link
@@ -58,4 +64,4 @@ function DocumentNode({ id, data }: NodeProps<Node>) {
   );
 }
 
-export default DocumentNode;
+export default memo(DocumentNode);

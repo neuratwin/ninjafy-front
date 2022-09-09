@@ -1,3 +1,4 @@
+import { useState, memo } from "react";
 import { NodeProps, Node, Handle, Position } from "react-flow-renderer";
 import useStore from "../../layouts/store";
 import { documentSubNodeDetails } from "../../utils/NodeDetails";
@@ -6,6 +7,7 @@ import SideNodePanel from "../SideNodePanel";
 
 function DocumentBucketNode({ id, data }: NodeProps<Node>) {
   const [setNodes] = useStore((state) => [state.setNodes]);
+  const [bucketName, setBucketName] = useState<string>("Bucket");
 
   return (
     <div className="flex">
@@ -13,9 +15,14 @@ function DocumentBucketNode({ id, data }: NodeProps<Node>) {
         <Handle type="target" position={Position.Top} />
         <div className="flex justify-around border-b border-black pb-2">
           <div className="text-gray-500 ml-2 flex  text-base">
-            Document Bucket
+            <input
+              type="text"
+              className="bg-gray-100 px-2 focus:outline-none"
+              placeholder="Your bucket name ..."
+              value={bucketName}
+              onChange={(e) => setBucketName(e.target.value)}
+            />
           </div>
-
           <div className="flex ">
             <div
               onClick={() => setNodes(documentSubNodeDetails(id))}
@@ -34,4 +41,4 @@ function DocumentBucketNode({ id, data }: NodeProps<Node>) {
   );
 }
 
-export default DocumentBucketNode;
+export default memo(DocumentBucketNode);
